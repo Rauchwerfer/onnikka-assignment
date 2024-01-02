@@ -30,15 +30,43 @@ const usersData = [
 ]
 
 class UsersDataController {
+    /**
+     * Users Data
+     * @type {[{ users: number, date: Date}]} 
+     */
     #initialData = []
 
+    /**
+     * Chart control
+     * @type {Chart}
+     */
     #chart
+    /**
+     * Table body
+     * @type {HTMLElement}
+     */
     #tableBody
 
+    /**
+     * Filter Input: Date from
+     * @type {HTMLElement}
+     */
     #dateFromInput
+    /**
+     * Filter Input: Date to
+     * @type {HTMLElement}
+     */
     #dateToInput
 
+    /**
+     * Shown records number
+     * @type {HTMLElement}
+     */
     #shownRecordsView
+    /**
+     * Total records number
+     * @type {HTMLElement}
+     */
     #totalRecordsView
 
     /**

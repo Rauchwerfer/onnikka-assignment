@@ -94,7 +94,7 @@ class WeightDataController {
     #data
 
     /**
-     * Controller for WeightData model
+     * Table body
      * @type {HTMLElement}
      */
     #tableBody
