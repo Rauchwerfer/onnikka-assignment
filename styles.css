@@ -1,0 +1,9 @@
+:root {
+    /* Onnikka's logo color */
+    --heading-title-color: #f2601f; 
+}
+
+.dark-bg {
+    background-color: var(--bs-gray-dark);
+    color: white;
+}

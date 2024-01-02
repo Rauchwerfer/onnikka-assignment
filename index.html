@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onnikka Assignment Dmitrii</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body data-theme-colored="body">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" data-theme-colored="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#" style="color: var(--heading-title-color)">Onnikka Assignment</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <div class="ms-auto d-flex">
+                    <button class="btn btn-light" id="colorSchemeSwitcher">Light Mode</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="container" data-theme-colored="container">
+        <section class="row border border-top-0 pt-2" data-theme-colored="bordered-1">
+            <div class="col-12 col-md-2">
+                <h2 style="color: var(--heading-title-color)">Weight data</h2>
+                <p>Filters:</p>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="averageChangesCheckbox" checked>
+                    <label class="form-check-label" for="averageChangesCheckbox">
+                        Average Changes
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="medianChangesCheckbox" checked>
+                    <label class="form-check-label" for="medianChangesCheckbox">
+                        Median Changes
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="standardDeviationsCheckbox" checked>
+                    <label class="form-check-label" for="standardDeviationsCheckbox">
+                        Standard Deviations
+                    </label>
+                </div>
+            </div>
+            <div class="col-12 col-md-10">
+                <div class="ratio" style="--bs-aspect-ratio: 50%">
+                    <canvas id="weightDataChart"></canvas>
+                </div>
+            </div>
+            <div class="col-12">
+                <button class="btn btn-outline-light my-2" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseWeightTable" aria-expanded="false" aria-controls="collapseWeightTable"
+                    data-theme-colored="buttonTableCollapse">
+                    Table representation
+                </button>
+                <div class="collapse" id="collapseWeightTable">
+                    <table class="table table-striped table-dark" data-theme-colored="table-1">
+                        <thead>
+                            <tr>
+                                <th scope="col">Month</th>
+                                <th scope="col">Count</th>
+                                <th scope="col">Average Change</th>
+                                <th scope="col">Median Change</th>
+                                <th scope="col">Standard Deviation</th>
+                            </tr>
+                        </thead>
+                        <tbody id="weightDataTableBody">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        <section class="row border border-top-0 pt-2 justify-content-between" data-theme-colored="bordered-2">
+            <div class="col-12">
+                <h2 style="color: var(--heading-title-color)">Users data</h2>
+            </div>
+            <div class="col-12 col-md-3">
+                <div class="border rounded p-2 mb-2" data-theme-colored="bordered-3">
+                    <p>Sorting field:</p>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="sortingFieldRadios" id="sortingFieldRadioAsc"
+                            value="date" checked>
+                        <label class="form-check-label" for="sortingFieldRadioAsc">
+                            Date
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="sortingFieldRadios"
+                            id="sortingFieldRadioDesc" value="users">
+                        <label class="form-check-label" for="sortingFieldRadioDesc">
+                            Users
+                        </label>
+                    </div>
+                </div>
+                <div class="border rounded p-2 my-2" data-theme-colored="bordered-4">
+                    <p>Sorting type:</p>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="sortingTypeRadios" id="sortingTypeRadioAsc"
+                            value="asc" checked>
+                        <label class="form-check-label" for="sortingTypeRadioAsc">
+                            Asc
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="sortingTypeRadios" id="sortingTypeRadioDesc"
+                            value="desc">
+                        <label class="form-check-label" for="sortingTypeRadioDesc">
+                            Desc
+                        </label>
+                    </div>
+                </div>
+                <div class="border rounded p-2 my-2" data-theme-colored="bordered-5">
+                    <p>Date span:</p>
+                    <div class="mb-3">
+                        <label class="form-label" for="dateFromInput">
+                            From
+                        </label>
+                        <input class="form-control" type="date" id="dateFromInput">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="dateToInput">
+                            To
+                        </label>
+                        <input class="form-control" type="date" id="dateToInput">
+                    </div>
+                    <p>Records shown: <strong id="usersDataShownRecordsView">9</strong> out of <strong
+                            id="usersDataTotalRecordsView">10</strong></p>
+                </div>
+            </div>
+            <div class="col-12 col-md-9">
+                <table class="table table-striped table-dark" data-theme-colored="table-2">
+                    <thead>
+                        <tr>
+                            <th scope="col">Date</th>
+                            <th scope="col">Users</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usersDataTableBody">
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-12">
+                <div class="ratio" style="--bs-aspect-ratio: 50%">
+                    <canvas id="usersDataChart"></canvas>
+                </div>
+            </div>
+        </section>
+        <section class="row border border-top-0 justify-content-center" data-theme-colored="footer">
+            <div class="col text-center ">
+                <p class="mt-2">Dmitrii Cherkasov</p>
+                <p>for Onnikka Health Oy</p>
+            </div>
+        </section>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="chartColors.js"></script>
+    <script src="weightDataScript.js"></script>
+    <script src="usersDataScript.js"></script>
+    <script src="colorSchemeSwitch.js"></script>
+</body>
+
+</html>
