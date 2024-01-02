@@ -42,6 +42,11 @@ class UsersDataController {
      */
     #chart
     /**
+     * 2D Context of chart canvas
+     * @type {CanvasRenderingContext2D}
+     */
+    #chartCtx
+    /**
      * Table body
      * @type {HTMLElement}
      */
@@ -97,7 +102,10 @@ class UsersDataController {
         this.#tableBody = document.getElementById('usersDataTableBody')
 
         // Chart
-        this.#chart = new Chart(document.getElementById('usersDataChart').getContext('2d'), {
+        const chartCanvas = document.getElementById('usersDataChart')
+
+        this.#chartCtx = chartCanvas.getContext('2d')
+        this.#chart = new Chart(this.#chartCtx, {
             type: 'line',
             data: this.#initialData,
             options: {
@@ -159,8 +167,27 @@ class UsersDataController {
         radioButtons.forEach(radioButton => {
             radioButton.onchange = () => this.processAndRenderContent()
         })
+
+        // Custom handler for theme changing since Chart styles are controlled from script
+        chartCanvas.addEventListener("themechanged",
+            (e) => {
+                const isDarkThemeOn = e.detail
+
+                this.#chart.options.plugins.title.color = isDarkThemeOn ? '#FFFFFF' : '#000000'
+                this.#chart.options.scales.x.ticks.color = isDarkThemeOn ? '#FFFFFF' : Chart.defaults.color
+                this.#chart.options.scales.y.ticks.color = isDarkThemeOn ? '#FFFFFF' : Chart.defaults.color
+
+                this.#chart.data.datasets.forEach(dataset => {
+                    dataset.color = isDarkThemeOn ? '#FFFFFF' : Chart.defaults.color
+                });
+
+                this.#chart.options.plugins.legend.labels.color = isDarkThemeOn ? '#FFFFFF' : Chart.defaults.color
+
+                this.#chart.update()
+            },
+            false)
     }
-    
+
     /**
      * Apply filters and sortings and render views
      */
@@ -265,7 +292,7 @@ class UsersDataController {
                 backgroundColor: CHART_COLORS.green,
                 borderColor: CHART_COLORS.green,
                 borderWidth: 1,
-                cubicInterpolationMode: 'monotone',
+                cubicInterpolationMode: 'default',
                 yAxisID: 'y'
             }]
         }

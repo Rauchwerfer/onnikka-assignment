@@ -33,7 +33,8 @@ const themedElements = [
 ]
 
 const themeSwitchEventHandlers = [
-    document.getElementById('weightDataChart')
+    document.getElementById('weightDataChart'),
+    document.getElementById('usersDataChart')
 ]
 
 function switchTheme() {
